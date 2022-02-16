@@ -5,20 +5,29 @@ import {Dimensions, SafeAreaView, View} from 'react-native';
 import 'react-native-gesture-handler';
 import Navigation from './screen_navigation';
 import authContext from './context/Authentication';
+import {LogBox} from 'react-native';
+import {GESTREAM_API_KEY} from '@env';
+import auth from '@react-native-firebase/auth';
 
 const App = () => {
   //global variables for loged in user
+
+  LogBox.ignoreAllLogs(true);
   const [userId, setUserId] = useState('');
 
   //get stream API keys
 
-  const API_KEY = 'br6fc3z2bx7d';
-  const client = StreamChat.getInstance(API_KEY);
+  const client = StreamChat.getInstance(GESTREAM_API_KEY);
 
   useEffect(() => {
-    //
+    // DISCONNECT FROM GETSTREAM AND SIGN OUT FROM FIREBASE WHEN APPLICATION IS OFF
 
-    return () => client.disconnectUser();
+    return () => {
+      client.disconnectUser();
+      auth()
+        .signOut()
+        .then(() => console.log('User signed out!'));
+    };
   }, []);
 
   return (

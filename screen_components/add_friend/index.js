@@ -4,7 +4,6 @@ import {Button_press} from '../../Global_files';
 import authContext from '../../context/Authentication';
 import {useChatContext} from 'stream-chat-react-native';
 import {useNavigation} from '@react-navigation/native';
-import {screen_width} from '../../global_style';
 import {styles} from '../add_banner';
 
 const Add_friend = ({users}) => {
@@ -36,8 +35,8 @@ const Add_friend = ({users}) => {
     <View style={styles.group_header}>
       <TextInput
         style={styles.textInput}
-        onChangeText={e => {
-          setUser_name(e);
+        onChange={e => {
+          setUser_name(e.nativeEvent.text);
           setIsValid(true);
         }}
         placeholder="User Name"

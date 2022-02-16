@@ -80,6 +80,10 @@ import com.android.build.OutputFile
 
 project.ext.react = [
     enableHermes: true,  // clean and rebuild if changing
+    entryFile: "index.js",
+    bundleAssetName: "index.android.bundle",
+    bundleInAlpha: true,
+    bundleInBeta: true
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
@@ -127,6 +131,8 @@ def enableHermes = project.ext.react.get("enableHermes", false);
 def nativeArchitectures = project.getProperties().get("reactNativeDebugArchitectures")
 
 android {
+
+   
     ndkVersion rootProject.ext.ndkVersion
 
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -187,6 +193,11 @@ android {
             }
 
         }
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
     }
 }
 

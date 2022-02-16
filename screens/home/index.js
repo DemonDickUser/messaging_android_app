@@ -25,7 +25,6 @@ const Home = () => {
   const fetch_users = async () => {
     const response = await client.queryUsers({});
     setUsers(response.users);
-    console.log(response.users);
     setIsLoading(false);
   };
 
